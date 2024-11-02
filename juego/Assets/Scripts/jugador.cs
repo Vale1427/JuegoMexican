@@ -1,33 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class jugador : MonoBehaviour
 {
     public float fuerzaSalto;
-    private Rigidbody2D rigidbody2D;
+    private Rigidbody2D rb2d;
     private Animator animator;
     private bool estaMoviendo = false;
+    [SerializeField] private BarraDeVida BarraDeVida;
+  
+    //para la vida
+    public float vidaMaxima; 
+    private float vidaActual;
+
+    // Variables para restringir el movimiento del jugador
+    private Camera cam;
+    private float minX;
+    private float maxX;
+    private bool estaEnSuelo;
     
 
-    // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rb2d = GetComponent<Rigidbody2D>();
         animator.SetBool("estaCorriendo", false);
+
+    // Buscar y asignar la barra de vida
+        BarraDeVida = FindObjectOfType<BarraDeVida>();
+        if (BarraDeVida == null)
+        {
+            Debug.LogError("BarraDeVida no encontrada en la escena.");
+        }
+        else
+        {
+            // Inicializar la vida del jugador y la barra de vida
+            vidaActual = vidaMaxima;
+            BarraDeVida.InicializarBarraDeVida(vidaMaxima);
+        }
+
+
+        // cam = Camera.main; // Obtener la cámara principal
+        // // Calcular los límites en X basados en la posición de la cámara
+        // float cameraHeight = 2f * cam.orthographicSize; // Altura de la cámara
+        // float cameraWidth = cameraHeight * cam.aspect; // Ancho de la cámara
+
+        // minX = cam.transform.position.x - (cameraWidth / 2); // Límite izquierdo
+        // maxX = cam.transform.position.x + (cameraWidth / 2); // Límite derecho
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // Movimiento horizontal
         float movimientoHorizontal = Input.GetAxis("Horizontal");
 
-        if (movimientoHorizontal != 0)
+        if (Mathf.Abs(movimientoHorizontal) > 0.01f)
         {
             animator.SetBool("estaCorriendo", true);
             estaMoviendo = true;
+
             // Mover el jugador
             transform.position += new Vector3(movimientoHorizontal, 0, 0) * 3f * Time.deltaTime;
             
@@ -49,35 +82,132 @@ public class jugador : MonoBehaviour
             
         }
 
-        if(Input.GetKeyDown(KeyCode.Space)){
+        if(Input.GetKeyDown(KeyCode.Space) && estaEnSuelo){
             animator.SetBool("estaSaltando", true);
-            rigidbody2D.AddForce(new Vector2(0, fuerzaSalto));
+            rb2d.AddForce(new Vector2(0, fuerzaSalto));
+            estaEnSuelo = false;
         }
+
+        // // Restringir el movimiento del jugador dentro de los límites de la cámara
+        // Vector3 position = transform.position;
+        // position.x = Mathf.Clamp(position.x, minX, maxX); // Limitar la posición X
+        // transform.position = position; // Aplicar la posición restringida
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision){
-        if(collision.gameObject.tag == "Suelo"){
-            animator.SetBool("estaSaltando", false);
-        }
+    // private void OnCollisionEnter2D(Collision2D collision){
+    //     if(collision.gameObject.tag == "Suelo"){
+    //         animator.SetBool("estaSaltando", false);
+    //         estaEnSuelo = true;
+    //     }
 
-        if (collision.gameObject.tag == "alien")
-        {
-            animator.SetBool("choco", true);
-        }
-        // else if(collision.gameObject.tag == "alien"){
-        //     animator.SetBool("choco", true);
-        // }
-    }
-
-    // private void OnCollisionStay2D(Collision2D collision)
-    // {
-    //     // Si el jugador sigue colisionando con un alien, mantener la animación "choco"
     //     if (collision.gameObject.tag == "alien")
     //     {
-    //         animator.SetBool("choco", true);
+
+    //     }
+    //     else{animator.SetBool("choco", true);
+            
+    //         // Reducir vida del jugador
+    //         float dano = 10f; // Cantidad de vida que se reduce al chocar con el alien
+    //         vidaActual -= dano;
+
+    //         // Actualizar la barra de vida
+    //         BarraDeVida.CambiarVidaActual(vidaActual);
+
+
+    //         // Verificar si el jugador ha muerto (opcional)
+    //         if (vidaActual <= 0)
+    //         {
+    //             Muerte();
+    //         }
+    //     }
+
+
+    //     if(collision.gameObject.tag == "bandera"){
+    //         float vida = 10f;
+    //         vidaActual += vida;
+
+    //         // Actualizar la barra de vida
+    //         BarraDeVida.CambiarVidaActual(vidaActual);
+
+    //         Destroy(collision.gameObject);
+
     //     }
     // }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+    if (collision.gameObject.tag == "Suelo" || collision.gameObject.tag == "plataforma")
+    {
+        animator.SetBool("estaSaltando", false);
+        estaEnSuelo = true;
+    }
+
+    // if (collision.gameObject.tag == "alien")
+    // {
+    //     // Verificar si el jugador cayó desde arriba del enemigo
+    //     float puntoDeImpacto = collision.contacts[0].point.y;  // Punto de contacto en Y
+    //     float posicionJugador = transform.position.y;          // Posición en Y del jugador
+    //     float posicionEnemigo = collision.transform.position.y; // Posición en Y del enemigo
+
+    //     // Si la posición del jugador está por encima del enemigo 
+    //     if (puntoDeImpacto > posicionEnemigo && posicionJugador > posicionEnemigo + 0.05f)
+    //     {
+    //         // Ejecutar la animación del enemigo y destruirlo
+    //         EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
+    //         if (enemy != null)
+    //         {
+    //             enemy.AtacarYDestruir();
+    //         }
+
+    //         // Hacer que el jugador salte después de destruir el enemigo
+    //         rb2d.AddForce(new Vector2(0, fuerzaSalto * 1f)); // Ajusta el factor de salto si es necesario
+    //     }
+    //     else
+    //     {
+    //         // Si el jugador choca con el enemigo pero no desde arriba, puede perder vida
+    //         animator.SetBool("choco", true);
+    //         float dano = 10f;
+    //         vidaActual -= dano;
+    //         BarraDeVida.CambiarVidaActual(vidaActual);
+
+    //         if (vidaActual <= 0)
+    //         {
+    //             Muerte();
+    //         }
+    //     }
+    // }
+
+
+    if (collision.gameObject.tag == "alien")
+        {
+                        // Reducir vida del jugador
+            float dano = 10f; // Cantidad de vida que se reduce al chocar con el alien
+            vidaActual -= dano;
+
+            // Actualizar la barra de vida
+            BarraDeVida.CambiarVidaActual(vidaActual);
+            animator.SetBool("choco", true);
+
+
+            // Verificar si el jugador ha muerto (opcional)
+            if (vidaActual <= 0)
+            {
+                Muerte();
+            }
+
+        }
+
+
+    if (collision.gameObject.tag == "bandera")
+    {
+        float vida = 10f;
+        vidaActual += vida;
+        BarraDeVida.CambiarVidaActual(vidaActual);
+        Destroy(collision.gameObject);
+    }
+}
+
 
     private void OnCollisionExit2D(Collision2D collision)
     {
@@ -88,9 +218,38 @@ public class jugador : MonoBehaviour
         }
     }
 
+    private void Muerte()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+    }
+
     // Verificar si el jugador se está moviendo
     public bool JugadorSeEstaMoviendo()
     {
         return estaMoviendo;
     }
+
+
+    // private void OnCollisionStay2D(Collision2D collision)
+    // {
+    //     //Si el jugador sigue colisionando con un alien, mantener la animación "choco"
+    //     if (collision.gameObject.tag == "alien")
+    //     {
+    //        animator.SetBool("choco", true);
+
+    //         // Reducir vida del jugador
+    //         float dano = 10f; // Cantidad de vida que se reduce al chocar con el alien
+    //         vidaActual -= dano;
+
+    //         // Actualizar la barra de vida
+    //         BarraDeVida.CambiarVidaActual(vidaActual);
+
+
+    //         // Verificar si el jugador ha muerto (opcional)
+    //         if (vidaActual <= 0)
+    //         {
+    //             Muerte();
+    //         }
+    //     }
+    // }
 }

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e61b503bcda97543b44cf1cbbbfc226, type: 3}
+  m_Name: Valentin
+  m_EditorClassIdentifier: 
+  personajeJugable: {fileID: 1261967383301919082, guid: df29dd7e03fef0049a373e170339d887, type: 3}
+  imagen: {fileID: 1385217456, guid: 78ff78b1f98a6e64dbbd7d1d99b1aaa6, type: 3}
+  nombre: Valentina
