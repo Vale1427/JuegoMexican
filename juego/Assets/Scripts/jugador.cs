@@ -199,14 +199,23 @@ public class jugador : MonoBehaviour
         }
 
 
-    if (collision.gameObject.tag == "bandera")
-    {
-        float vida = 10f;
-        vidaActual += vida;
-        BarraDeVida.CambiarVidaActual(vidaActual);
-        Destroy(collision.gameObject);
-    }
+    // if (collision.gameObject.tag == "bandera")
+    // {
+    //     float vida = 10f;
+    //     vidaActual += vida;
+    //     BarraDeVida.CambiarVidaActual(vidaActual);
+    //     Destroy(collision.gameObject);
+    // }
 }
+
+
+    private void OnTriggerEnter2D(Collider2D other){
+        if(other.CompareTag("bandera")){
+            float vida = 10f;
+            vidaActual += vida;
+            BarraDeVida.CambiarVidaActual(vidaActual);
+        }
+    }
 
 
     private void OnCollisionExit2D(Collision2D collision)
