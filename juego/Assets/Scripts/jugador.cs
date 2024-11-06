@@ -143,89 +143,83 @@ public class jugador : MonoBehaviour
         estaEnSuelo = true;
     }
 
-    // if (collision.gameObject.tag == "alien")
-    // {
-    //     // Verificar si el jugador cayó desde arriba del enemigo
-    //     float puntoDeImpacto = collision.contacts[0].point.y;  // Punto de contacto en Y
-    //     float posicionJugador = transform.position.y;          // Posición en Y del jugador
-    //     float posicionEnemigo = collision.transform.position.y; // Posición en Y del enemigo
-
-    //     // Si la posición del jugador está por encima del enemigo 
-    //     if (puntoDeImpacto > posicionEnemigo && posicionJugador > posicionEnemigo + 0.05f)
-    //     {
-    //         // Ejecutar la animación del enemigo y destruirlo
-    //         EnemyController enemy = collision.gameObject.GetComponent<EnemyController>();
-    //         if (enemy != null)
-    //         {
-    //             enemy.AtacarYDestruir();
-    //         }
-
-    //         // Hacer que el jugador salte después de destruir el enemigo
-    //         rb2d.AddForce(new Vector2(0, fuerzaSalto * 1f)); // Ajusta el factor de salto si es necesario
-    //     }
-    //     else
-    //     {
-    //         // Si el jugador choca con el enemigo pero no desde arriba, puede perder vida
-    //         animator.SetBool("choco", true);
-    //         float dano = 10f;
-    //         vidaActual -= dano;
-    //         BarraDeVida.CambiarVidaActual(vidaActual);
-
-    //         if (vidaActual <= 0)
-    //         {
-    //             Muerte();
-    //         }
-    //     }
-    // }
-
-
     if (collision.gameObject.tag == "alien")
+    {
+        // Verificar si el jugador cayó desde arriba del enemigo
+        float puntoDeImpacto = collision.contacts[0].point.y;  // Punto de contacto en Y
+        float posicionJugador = transform.position.y;          // Posición en Y del jugador
+        float posicionEnemigo = collision.transform.position.y; // Posición en Y del enemigo
+
+        // Si la posición del jugador está por encima del enemigo 
+        if (puntoDeImpacto > posicionEnemigo && posicionJugador > posicionEnemigo + 0.05f)
         {
-                        // Reducir vida del jugador
-            float dano = 10f; // Cantidad de vida que se reduce al chocar con el alien
+            // Ejecutar la animación del enemigo y destruirlo
+            AlienController enemy = collision.gameObject.GetComponent<AlienController>();
+            if (enemy != null)
+            {
+                enemy.AtacarYDestruir();
+            }
+
+            // Hacer que el jugador salte después de destruir el enemigo
+            rb2d.AddForce(new Vector2(0, fuerzaSalto * 1f)); // Ajusta el factor de salto si es necesario
+        }
+        else
+        {
+            // Si el jugador choca con el enemigo pero no desde arriba, puede perder vida
+            //animator.SetBool("choco", true);
+            float dano = 10f;
             vidaActual -= dano;
-
-            // Actualizar la barra de vida
             BarraDeVida.CambiarVidaActual(vidaActual);
-            animator.SetBool("choco", true);
 
-
-            // Verificar si el jugador ha muerto (opcional)
             if (vidaActual <= 0)
             {
                 Muerte();
             }
-
         }
+    }
 
 
-    // if (collision.gameObject.tag == "bandera")
-    // {
-    //     float vida = 10f;
-    //     vidaActual += vida;
-    //     BarraDeVida.CambiarVidaActual(vidaActual);
-    //     Destroy(collision.gameObject);
-    // }
+    // if (collision.gameObject.tag == "alien")
+    //     {
+    //                     // Reducir vida del jugador
+    //         float dano = 10f; // Cantidad de vida que se reduce al chocar con el alien
+    //         vidaActual -= dano;
+
+    //         // Actualizar la barra de vida
+    //         BarraDeVida.CambiarVidaActual(vidaActual);
+    //         animator.SetBool("choco", true);
+
+
+    //         // Verificar si el jugador ha muerto (opcional)
+    //         if (vidaActual <= 0)
+    //         {
+    //             Muerte();
+    //         }
+
+    //     }
+
 }
 
-
+//si choca con la bandera que desaparesca
     private void OnTriggerEnter2D(Collider2D other){
         if(other.CompareTag("bandera")){
             float vida = 10f;
             vidaActual += vida;
             BarraDeVida.CambiarVidaActual(vidaActual);
+            Destroy(other.gameObject);
         }
     }
 
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        // Si el jugador deja de colisionar con un alien, detener la animación "choco"
-        if (collision.gameObject.tag == "alien")
-        {
-            animator.SetBool("choco", false);
-        }
-    }
+
+    // private void OnCollisionExit2D(Collision2D collision)
+    // {
+    //     // Si el jugador deja de colisionar con un alien, detener la animación "choco"
+    //     if (collision.gameObject.tag == "alien")
+    //     {
+    //         animator.SetBool("choco", false);
+    //     }
+    // }
 
     private void Muerte()
     {
@@ -239,26 +233,4 @@ public class jugador : MonoBehaviour
     }
 
 
-    // private void OnCollisionStay2D(Collision2D collision)
-    // {
-    //     //Si el jugador sigue colisionando con un alien, mantener la animación "choco"
-    //     if (collision.gameObject.tag == "alien")
-    //     {
-    //        animator.SetBool("choco", true);
-
-    //         // Reducir vida del jugador
-    //         float dano = 10f; // Cantidad de vida que se reduce al chocar con el alien
-    //         vidaActual -= dano;
-
-    //         // Actualizar la barra de vida
-    //         BarraDeVida.CambiarVidaActual(vidaActual);
-
-
-    //         // Verificar si el jugador ha muerto (opcional)
-    //         if (vidaActual <= 0)
-    //         {
-    //             Muerte();
-    //         }
-    //     }
-    // }
 }
