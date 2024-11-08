@@ -25,4 +25,8 @@ public class MenuInicial : MonoBehaviour
     public void VolverJugar(){
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
     }
+
+    public void SeleccionPersonaje(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
 }

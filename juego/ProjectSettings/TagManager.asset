@@ -9,6 +9,7 @@ TagManager:
   - plataforma
   - bandera
   - taco
+  - arma
   layers:
   - Default
   - TransparentFX
