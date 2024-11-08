@@ -208,8 +208,15 @@ public class jugador : MonoBehaviour
             BarraDeVida.CambiarVidaActual(vidaActual);
             Destroy(other.gameObject);
         }
-    }
 
+        //  if(other.CompareTag("arma")){
+
+        //     animator.SetBool("fail-alejandro", true);
+            
+            
+        //     Destroy(other.gameObject);
+        // }
+    }
 
 
     // private void OnCollisionExit2D(Collision2D collision)
