@@ -23,15 +23,15 @@ public class ProfileList: MonoBehaviour
             uibox.loadBtn.onClick.AddListener(()=>{
                 Debug.Log("cargado!");
 
-                //ProfileStorage.LoadProfile(profileName);
-                SceneManager.LoadScene("P_Game");
+                ProfileStorage.LoadProfile(profileName);
+                SceneManager.LoadScene("Nivel");
             });
 
             //click eliminar
             uibox.loadBtn.onClick.AddListener(()=>{
                 Debug.Log("eliminado");
-                //ProfileStorage.DeleteProfile(profileName);
-                //Destroy(go);
+                ProfileStorage.DeleteProfile(profileName);
+                Destroy(go);
             });
             go.transform.SetParent(this.profilesHolder, false);
             

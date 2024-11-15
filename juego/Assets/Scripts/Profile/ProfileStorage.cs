@@ -21,7 +21,7 @@ public static class ProfileStorage{
 
         //update index
         var index = GetProfileIndex();
-        index.profileFileNames.Add(s_currentProfile.filename);
+        index.profileFileNames.Add(s_currentProfile.name);
 
         //save index
         SaveFile<ProfileIndex>(s_indexPath, index);
@@ -34,6 +34,24 @@ public static class ProfileStorage{
         return LoadFile<ProfileIndex>(s_indexPath);
     }
 
+    //metodos recuperados
+    //guardar y cargar info
+    public static void LoadProfile(string filename)
+    {
+        var path = Application.streamingAssetsPath + "/Profiles/" + filename;
+        s_currentProfile = LoadFile<ProfileData>(path);
+    }
+
+    public static void StorePlayerProfile(GameObject player){
+        s_currentProfile.x = player.transform.position.x;
+        s_currentProfile.y = player.transform.position.y;
+        s_currentProfile.newGame = false;
+
+        var path = Application.streamingAssetsPath + "/Profiles/" + s_currentProfile.filename;
+        SaveFile<ProfileData>(path, s_currentProfile);
+
+    }
+
     //metodos para guardar datos en un archivo
     static void SaveFile<T>(string path, T data){
         var profileWriter = new StreamWriter(path);
@@ -42,7 +60,19 @@ public static class ProfileStorage{
         profileWriter.Dispose();
     }
 
-//cargar datos de un archivo
+    //borrar
+    public static void DeleteProfile(string filename){
+        var path = Application.streamingAssetsPath + "/Profiles/" + filename;
+        File.Delete(path);
+
+        var index= LoadFile<ProfileIndex>(s_indexPath);
+        index.profileFileNames.Remove(filename);
+
+        SaveFile<ProfileIndex>(s_indexPath, index);
+
+    }
+
+    //cargar datos de un archivo
     static T LoadFile<T>(string path){
         var progileReader = new StreamReader(path);
         var serializer = new XmlSerializer(typeof(T));
@@ -51,4 +81,7 @@ public static class ProfileStorage{
 
         return obj;
     }
+
+
+    
 }
