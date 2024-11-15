@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class CamaraScript : MonoBehaviour
 {
+    public GameObject alejandro; // Referencia al jugador
+    public float minX = -20f; // Límite izquierdo
+    public float maxX = 10f;  // Límite derecho
 
-    public GameObject alejandro;
-
-    // Update is called once per frame
     void Update()
     {
+        if (alejandro != null)
+        {
+            Vector3 position = transform.position;
 
-        Vector3 position = transform.position;
-        position.x = alejandro.transform.position.x;
-        transform.position = position;
-        
+            //posición de la cámara en función del jugador
+            position.x = Mathf.Clamp(alejandro.transform.position.x, minX, maxX);
+            transform.position = position;
+        }
     }
 }

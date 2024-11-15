@@ -169,5 +169,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fuerzaSalto: 400
+  velocidadRebote: {x: 4, y: 4}
   BarraDeVida: {fileID: 0}
   vidaMaxima: 50
