@@ -13,29 +13,59 @@ public class ProfileList: MonoBehaviour
         var index = ProfileStorage.GetProfileIndex();
 
         foreach (var profileName in index.profileFileNames)
+    {
+        var go = Instantiate(this.profileUIBoxPrefab);
+        var uibox = go.GetComponent<ProfileBoxUI>();
+
+        uibox.nameLabel.text = profileName;
+
+        // Recupera el perfil para mostrar puntos
+        ProfileStorage.LoadProfile(profileName); 
+        uibox.puntos.text = ProfileStorage.s_currentProfile.points.ToString();
+
+        // Configura botones de cargar y eliminar
+        uibox.loadBtn.onClick.AddListener(() =>
         {
-            var go = Instantiate(this.profileUIBoxPrefab);
-            var uibox = go.GetComponent<ProfileBoxUI>();
+            Debug.Log("Cargado!");
 
-            uibox.nameLabel.text = profileName;
+            ProfileStorage.LoadProfile(profileName);
+            SceneManager.LoadScene("Nivel");
+        });
 
-            //click cargar boton
-            uibox.loadBtn.onClick.AddListener(()=>{
-                Debug.Log("cargado!");
+        uibox.deleteBtn.onClick.AddListener(() =>
+        {
+            Debug.Log("Eliminado");
+            ProfileStorage.DeleteProfile(profileName);
+            Destroy(go);
+        });
 
-                ProfileStorage.LoadProfile(profileName);
-                SceneManager.LoadScene("Nivel");
-            });
+        go.transform.SetParent(this.profilesHolder, false);
+    }
 
-            //click eliminar
-            uibox.deleteBtn.onClick.AddListener(()=>{
-                Debug.Log("eliminado");
-                ProfileStorage.DeleteProfile(profileName);
-                Destroy(go);
-            });
-            go.transform.SetParent(this.profilesHolder, false);
+        // foreach (var profileName in index.profileFileNames)
+        // {
+        //     var go = Instantiate(this.profileUIBoxPrefab);
+        //     var uibox = go.GetComponent<ProfileBoxUI>();
+
+        //     uibox.nameLabel.text = profileName;
+
+        //     //click cargar boton
+        //     uibox.loadBtn.onClick.AddListener(()=>{
+        //         Debug.Log("cargado!");
+
+        //         ProfileStorage.LoadProfile(profileName);
+        //         SceneManager.LoadScene("Nivel");
+        //     });
+
+        //     //click eliminar
+        //     uibox.deleteBtn.onClick.AddListener(()=>{
+        //         Debug.Log("eliminado");
+        //         ProfileStorage.DeleteProfile(profileName);
+        //         Destroy(go);
+        //     });
+        //     go.transform.SetParent(this.profilesHolder, false);
             
-        }
+        // }
     }
 
 }
