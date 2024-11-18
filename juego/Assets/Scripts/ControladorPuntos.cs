@@ -6,7 +6,7 @@ using TMPro;
 public class ControladorPuntos : MonoBehaviour
 {
     public static ControladorPuntos Instance;
-    [SerializeField] private float cantidadPuntos;
+    [SerializeField] public float cantidadPuntos;
 
       public void Awake(){
         if(ControladorPuntos.Instance == null){

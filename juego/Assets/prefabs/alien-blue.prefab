@@ -178,7 +178,7 @@ MonoBehaviour:
   balaEnemigo: {fileID: 586364014389195729, guid: e4ee903157d725e4f848bfa0d585822a, type: 3}
   tiempoEntreDisparos: 3
   tiempoUltimoDisparo: -3
-  tiempoEsperaDisparo: 0.45
+  tiempoEsperaDisparo: 0
 --- !u!1 &6655742714289480225
 GameObject:
   m_ObjectHideFlags: 0

@@ -167,7 +167,7 @@ public class jugador : MonoBehaviour
             
             vidaActual -= dano;
             BarraDeVida.CambiarVidaActual(vidaActual); 
-            Destroy(other); 
+            Destroy(other.gameObject);
 
             if (vidaActual <= 0)
             {
