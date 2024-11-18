@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 public static class ProfileStorage{
 
-    public static ProfileData s_currentProfile;//datos del perfil
+    public static ProfileData s_currentProfile;//datos del perfil, // Perfil cargado actualmente
 
     private static string s_indexPath = Application.streamingAssetsPath + "/Profiles/__ProfileIndex__.xml";
 
@@ -21,7 +21,7 @@ public static class ProfileStorage{
 
         //update index
         var index = GetProfileIndex();
-        index.profileFileNames.Add(s_currentProfile.name);
+        index.profileFileNames.Add(s_currentProfile.filename);
 
         //save index
         SaveFile<ProfileIndex>(s_indexPath, index);

@@ -28,7 +28,7 @@ public class ProfileList: MonoBehaviour
             });
 
             //click eliminar
-            uibox.loadBtn.onClick.AddListener(()=>{
+            uibox.deleteBtn.onClick.AddListener(()=>{
                 Debug.Log("eliminado");
                 ProfileStorage.DeleteProfile(profileName);
                 Destroy(go);

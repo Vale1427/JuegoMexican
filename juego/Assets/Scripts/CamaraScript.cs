@@ -5,8 +5,8 @@ using UnityEngine;
 public class CamaraScript : MonoBehaviour
 {
     public GameObject alejandro; // Referencia al jugador
-    public float minX = -20f; // Límite izquierdo
-    public float maxX = 10f;  // Límite derecho
+    public float minX = -15f; // Límite izquierdo
+    public float maxX = 40f;  // Límite derecho
 
     void Update()
     {

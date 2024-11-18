@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ProfileData xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <filename>Evelyn.xml</filename>
-  <name>Evelyn</name>
-  <newGame>true</newGame>
-  <x>0</x>
-  <y>0</y>
+  <filename>Karina.xml</filename>
+  <name>Karina</name>
+  <newGame>false</newGame>
+  <x>-7.48138</x>
+  <y>2.81636858</y>
   <points>0</points>
 </ProfileData>

@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 43
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -137,7 +137,7 @@ TextureImporter:
         width: 83
         height: 109
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -158,7 +158,7 @@ TextureImporter:
         width: 76
         height: 110
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -179,7 +179,7 @@ TextureImporter:
         width: 79
         height: 110
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -200,7 +200,7 @@ TextureImporter:
         width: 85
         height: 112
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -221,7 +221,7 @@ TextureImporter:
         width: 85
         height: 113
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -237,13 +237,13 @@ TextureImporter:
       name: jugadoraValentina-removebg-preview_5
       rect:
         serializedVersion: 2
-        x: 97
+        x: 105
         y: 168
-        width: 84
+        width: 77
         height: 115
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -258,13 +258,13 @@ TextureImporter:
       name: jugadoraValentina-removebg-preview_6
       rect:
         serializedVersion: 2
-        x: 181
+        x: 188
         y: 168
-        width: 84
+        width: 77
         height: 116
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 1, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -279,12 +279,12 @@ TextureImporter:
       name: jugadoraValentina-removebg-preview_7
       rect:
         serializedVersion: 2
-        x: 265
+        x: 275
         y: 168
-        width: 86
+        width: 76
         height: 117
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -300,12 +300,12 @@ TextureImporter:
       name: jugadoraValentina-removebg-preview_8
       rect:
         serializedVersion: 2
-        x: 350
+        x: 359
         y: 171
-        width: 83
+        width: 74
         height: 115
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -321,12 +321,12 @@ TextureImporter:
       name: jugadoraValentina-removebg-preview_9
       rect:
         serializedVersion: 2
-        x: 432
-        y: 171
-        width: 90
+        x: 442
+        y: 170
+        width: 80
         height: 116
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -347,7 +347,7 @@ TextureImporter:
         width: 94
         height: 118
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -368,7 +368,7 @@ TextureImporter:
         width: 99
         height: 115
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -384,12 +384,12 @@ TextureImporter:
       name: jugadoraValentina-removebg-preview_12
       rect:
         serializedVersion: 2
-        x: 221
+        x: 227
         y: 30
-        width: 92
+        width: 86
         height: 115
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -397,6 +397,48 @@ TextureImporter:
       bones: []
       spriteID: 344b581d2b818694d8520a112798cc35
       internalID: 1077635294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jugadoraValentina-removebg-preview_13
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 28
+        width: 84
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97b6e4052aac9464299c655a65326ba7
+      internalID: -1485071517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: jugadoraValentina-removebg-preview_14
+      rect:
+        serializedVersion: 2
+        x: 373
+        y: 318
+        width: 108
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2c4fbfbced46b04ab4c4a337251edba
+      internalID: -1863809608
       vertices: []
       indices: 
       edges: []
@@ -417,6 +459,8 @@ TextureImporter:
       jugadoraValentina-removebg-preview_10: 1033057863
       jugadoraValentina-removebg-preview_11: 1856827963
       jugadoraValentina-removebg-preview_12: 1077635294
+      jugadoraValentina-removebg-preview_13: -1485071517
+      jugadoraValentina-removebg-preview_14: -1863809608
       jugadoraValentina-removebg-preview_2: 521414505
       jugadoraValentina-removebg-preview_3: 462858637
       jugadoraValentina-removebg-preview_4: -371005134

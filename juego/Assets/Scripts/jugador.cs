@@ -157,6 +157,23 @@ public class jugador : MonoBehaviour
            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
         }
 
+        if(other.CompareTag("bala")){
+            animator.SetTrigger("golpe");
+            float dano = 10f;
+            // Rebote en dirección contraria al enemigo
+            //Vector2 direccionRebote = (transform.position.x > collision.transform.position.x) ? Vector2.right : Vector2.left;
+            rb2d.velocity = Vector2.zero; 
+           // rb2d.AddForce(new Vector2(direccionRebote.x * velocidadRebote.x, velocidadRebote.y), ForceMode2D.Impulse);
+            
+            vidaActual -= dano;
+            BarraDeVida.CambiarVidaActual(vidaActual);  
+
+            if (vidaActual <= 0)
+            {
+                Muerte();
+            }
+        }
+
     }
 
     private void CargarSiguienteEscena()
@@ -167,7 +184,7 @@ public class jugador : MonoBehaviour
 
     private void Muerte()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("game-over");
     }
 
     // Verificar si el jugador se está moviendo

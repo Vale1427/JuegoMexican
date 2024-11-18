@@ -10,6 +10,7 @@ TagManager:
   - bandera
   - taco
   - arma
+  - bala
   layers:
   - Default
   - TransparentFX

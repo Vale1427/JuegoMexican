@@ -9,5 +9,6 @@ public class ProfileBoxUI : MonoBehaviour
     public Text nameLabel;
     public Button deleteBtn;
     public Button loadBtn;
+    public Text puntos;
 
 }
