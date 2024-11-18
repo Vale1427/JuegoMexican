@@ -14,6 +14,12 @@ public class DisparoEnemigo : MonoBehaviour
     public float tiempoUltimoDisparo;
     public float tiempoEsperaDisparo;
 
+    private Animator animator;
+
+    void Start(){
+        animator = GetComponent<Animator>();
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -22,7 +28,9 @@ public class DisparoEnemigo : MonoBehaviour
 
         if(jugadorEnRango){
             if(Time.time > tiempoEntreDisparos + tiempoUltimoDisparo){
+                
                 tiempoUltimoDisparo = Time.time;
+                animator.SetTrigger("disparar");
                 Invoke(nameof(Disparar), tiempoEsperaDisparo);
             }
         }

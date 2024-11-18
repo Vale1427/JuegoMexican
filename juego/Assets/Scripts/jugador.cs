@@ -166,7 +166,8 @@ public class jugador : MonoBehaviour
            // rb2d.AddForce(new Vector2(direccionRebote.x * velocidadRebote.x, velocidadRebote.y), ForceMode2D.Impulse);
             
             vidaActual -= dano;
-            BarraDeVida.CambiarVidaActual(vidaActual);  
+            BarraDeVida.CambiarVidaActual(vidaActual); 
+            Destroy(other); 
 
             if (vidaActual <= 0)
             {
@@ -178,7 +179,7 @@ public class jugador : MonoBehaviour
 
     private void CargarSiguienteEscena()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
 

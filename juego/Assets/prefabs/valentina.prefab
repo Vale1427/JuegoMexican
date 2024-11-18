@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17990f7c7adf64e4a8c0a6c169a65abe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fuerzaSalto: 400
+  fuerzaSalto: 500
   velocidadRebote: {x: 4, y: 4}
   BarraDeVida: {fileID: 0}
   vidaMaxima: 50
