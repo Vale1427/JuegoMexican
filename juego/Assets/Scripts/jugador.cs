@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement;
 
 
 public class jugador : MonoBehaviour
@@ -208,8 +209,24 @@ public class jugador : MonoBehaviour
             BarraDeVida.CambiarVidaActual(vidaActual);
             Destroy(other.gameObject);
         }
+
+         if(other.CompareTag("arma")){
+            
+            Destroy(other.gameObject);
+
+
+            animator.SetTrigger("celebrando");
+
+
+            Invoke("CargarSiguienteEscena", 3f);//despes de 3 segundos 
+           // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        }
     }
 
+        private void CargarSiguienteEscena()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        }
 
 
     // private void OnCollisionExit2D(Collision2D collision)

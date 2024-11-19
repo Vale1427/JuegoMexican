@@ -36,6 +36,7 @@ public class MenuInicial : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
     }
 
+<<<<<<< HEAD
     void Update()
     {
         // Captura la posición del ratón en pantalla
@@ -47,5 +48,9 @@ public class MenuInicial : MonoBehaviour
 
         // Mueve el objeto hacia la posición del ratón con una cantidad de movimiento especificada
         transform.position = Vector3.MoveTowards(transform.position, mousePosition, movementQuantity * Time.deltaTime);
+=======
+    public void SeleccionPersonaje(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+>>>>>>> 5c0c99ead6400435689144e768b7cd3593a8187c
     }
 }
