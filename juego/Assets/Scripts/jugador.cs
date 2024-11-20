@@ -20,6 +20,8 @@ public class jugador : MonoBehaviour
     public float vidaMaxima; 
     private float vidaActual;
     private bool estaEnSuelo;
+
+    private string currentLevel;
     
 
     void Start()
@@ -27,6 +29,8 @@ public class jugador : MonoBehaviour
         animator = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
         animator.SetBool("estaCorriendo", false);
+        // Obtener el nombre del nivel actual
+        currentLevel = SceneManager.GetActiveScene().name;
 
     // Buscar y asignar la barra de vida
         BarraDeVida = FindObjectOfType<BarraDeVida>();
@@ -152,6 +156,16 @@ public class jugador : MonoBehaviour
 
             animator.SetTrigger("celebrando");
 
+            // Guarda el nivel completado en el perfil
+            if (ProfileStorage.s_currentProfile != null)
+            {
+                var profile = ProfileStorage.s_currentProfile;
+                if (!profile.completedLevels.Contains(currentLevel))
+                {
+                    profile.completedLevels.Add(currentLevel);
+                    ProfileStorage.StorePlayerProfile(GameObject.FindGameObjectWithTag("Player"));
+                }
+            }
 
             Invoke("CargarSiguienteEscena", 3f);//despes de 3 segundos 
            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
@@ -179,7 +193,7 @@ public class jugador : MonoBehaviour
 
     private void CargarSiguienteEscena()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Mapa");
     }
 
 

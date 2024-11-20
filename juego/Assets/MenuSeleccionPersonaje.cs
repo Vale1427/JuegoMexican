@@ -57,7 +57,7 @@ public class MenuSeleccionPersonaje : MonoBehaviour
 
 
     public void IniciarJuego(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("P_Game");
         Debug.Log("Índice del jugador seleccionado: " + PlayerPrefs.GetInt("JugadorIndex"));
 
     }
