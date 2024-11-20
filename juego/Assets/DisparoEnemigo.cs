@@ -13,11 +13,16 @@ public class DisparoEnemigo : MonoBehaviour
     public float tiempoEntreDisparos;
     public float tiempoUltimoDisparo;
     public float tiempoEsperaDisparo;
+    //Para sonidos
+    private AudioSource audioSource;
+    public AudioClip sonidodisparo;
+
 
     private Animator animator;
 
     void Start(){
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>(); // Asigna el componente AudioSource al script
     }
 
 
@@ -27,7 +32,7 @@ public class DisparoEnemigo : MonoBehaviour
         jugadorEnRango = Physics2D.Raycast(controladorDisparo.position, transform.right, distanciaLinea, capaJugador);
 
         if(jugadorEnRango){
-            if(Time.time > tiempoEntreDisparos + tiempoUltimoDisparo){
+            if (Time.time > tiempoEntreDisparos + tiempoUltimoDisparo){
                 
                 tiempoUltimoDisparo = Time.time;
                 animator.SetTrigger("disparar");
@@ -37,6 +42,11 @@ public class DisparoEnemigo : MonoBehaviour
     }
 
     private void Disparar(){
+         // Reproducir sonido del disparo
+            if (sonidodisparo != null)
+            {
+            audioSource.PlayOneShot(sonidodisparo);
+            }
         Instantiate(balaEnemigo, controladorDisparo.position, controladorDisparo.rotation);
     }
 
