@@ -13,6 +13,7 @@ public class DisparoEnemigo : MonoBehaviour
     public float tiempoEntreDisparos;
     public float tiempoUltimoDisparo;
     public float tiempoEsperaDisparo;
+    private bool Atacado = false;
 
     private Animator animator;
 
@@ -43,5 +44,13 @@ public class DisparoEnemigo : MonoBehaviour
     private void OnDrawGizmos(){
         Gizmos.color = Color.red;
         Gizmos.DrawLine(controladorDisparo.position, controladorDisparo.position + transform.right * distanciaLinea);
+    }
+
+    // Método para ejecutar la animación de ataque y destruir el enemigo
+    public void AtacarYDestruir()
+    {
+        Atacado = true;               // Detener el movimiento
+        animator.SetBool("Atacado", true);
+        Destroy(gameObject, 0.7f);        // Destruir el enemigo después de un corto tiempo
     }
 }

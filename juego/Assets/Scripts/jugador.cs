@@ -95,6 +95,9 @@ public class jugador : MonoBehaviour
         estaEnSuelo = true;
     }
 
+    //---------------------------------------------------------------------------------------------
+
+
     if (collision.gameObject.tag == "alien")
     {
         // Verificar si el jugador cayó desde arriba del enemigo
@@ -137,6 +140,95 @@ public class jugador : MonoBehaviour
         }
     }
 
+    //---------------------------------------------------------------------------------------------
+
+        if (collision.gameObject.tag == "blue")
+    {
+        // Verificar si el jugador cayó desde arriba del enemigo
+        float puntoDeImpacto = collision.contacts[0].point.y; 
+        float posicionJugador = transform.position.y;          
+        float posicionEnemigo = collision.transform.position.y; 
+
+        // Si la posición del jugador está por encima del enemigo 
+        if (puntoDeImpacto > posicionEnemigo && posicionJugador > posicionEnemigo + 0.05f)
+        {
+            // Ejecutar la animación del enemigo y destruirlo
+            DisparoEnemigo blue = collision.gameObject.GetComponent<DisparoEnemigo>();
+            if (blue != null)
+            {
+                blue.AtacarYDestruir();
+            }
+
+            // Hacer que el jugador salte después de destruir el enemigo
+            rb2d.AddForce(new Vector2(0, fuerzaSalto * 0.8f));//
+        }
+        else
+        {
+            // Si el jugador choca con el enemigo pero no desde arriba, puede perder vida
+            animator.SetTrigger("golpe");
+            float dano = 10f;
+            // Rebote en dirección contraria al enemigo
+            Vector2 direccionRebote = (transform.position.x > collision.transform.position.x) ? Vector2.right : Vector2.left;
+            rb2d.velocity = Vector2.zero; 
+            rb2d.AddForce(new Vector2(direccionRebote.x * velocidadRebote.x, velocidadRebote.y), ForceMode2D.Impulse);
+
+            
+            vidaActual -= dano;
+            BarraDeVida.CambiarVidaActual(vidaActual);
+            
+
+            if (vidaActual <= 0)
+            {
+                Muerte();
+            }
+        }
+    }
+
+
+
+    //-----------------------------------------------------------------------------------------------
+
+    if (collision.gameObject.tag == "rey")
+{
+    // Verificar si el jugador cayó desde arriba del enemigo
+    float puntoDeImpacto = collision.contacts[0].point.y; 
+    float posicionJugador = transform.position.y;          
+    float posicionEnemigo = collision.transform.position.y; 
+
+    if (puntoDeImpacto > posicionEnemigo && posicionJugador > posicionEnemigo + 0.05f)
+    {
+        // Acceder al script del Rey y registrar un golpe
+        ReyController rey = collision.gameObject.GetComponent<ReyController>();
+        if (rey != null)
+        {
+            rey.RecibirGolpe();
+        }
+
+        // Hacer que el jugador salte después de golpear al enemigo
+        rb2d.AddForce(new Vector2(0, fuerzaSalto * 0.8f));
+    }
+    else
+    {
+        // Si no cae desde arriba, el jugador recibe daño
+        animator.SetTrigger("golpe");
+        float dano = 10f;
+
+        // Rebote en dirección contraria al enemigo
+        Vector2 direccionRebote = (transform.position.x > collision.transform.position.x) ? Vector2.right : Vector2.left;
+        rb2d.velocity = Vector2.zero; 
+        rb2d.AddForce(new Vector2(direccionRebote.x * velocidadRebote.x, velocidadRebote.y), ForceMode2D.Impulse);
+
+        vidaActual -= dano;
+        BarraDeVida.CambiarVidaActual(vidaActual);
+
+        if (vidaActual <= 0)
+        {
+            Muerte();
+        }
+    }
+}
+
+
 }
 
 
@@ -149,7 +241,7 @@ public class jugador : MonoBehaviour
             Destroy(other.gameObject);
         }
 
-         if(other.CompareTag("arma")){
+         if(other.CompareTag("arma") || other.CompareTag("cohete")){
             
             Destroy(other.gameObject);
 
@@ -169,6 +261,12 @@ public class jugador : MonoBehaviour
 
             Invoke("CargarSiguienteEscena", 3f);//despes de 3 segundos 
            // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        }
+
+        if(other.CompareTag("corona")){
+            SceneManager.LoadScene("Fin");
+            animator.SetTrigger("celebrando");
+            Invoke("CargarFin", 3f);
         }
 
         if(other.CompareTag("bala")){
@@ -194,6 +292,12 @@ public class jugador : MonoBehaviour
     private void CargarSiguienteEscena()
     {
         SceneManager.LoadScene("Mapa");
+    }
+
+
+    private void CargarFin()
+    {
+        SceneManager.LoadScene("Fin");
     }
 
 
