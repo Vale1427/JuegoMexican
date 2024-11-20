@@ -1462,8 +1462,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 123646461d184e043b10613d384a6a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arma: {fileID: 0}
-  cohete: {fileID: 0}
+  arma: {fileID: 1941329277}
+  cohete: {fileID: 1941329277}
   corona: {fileID: 1941329277}
 --- !u!4 &760745542
 Transform:

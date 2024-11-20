@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
         }
 
 
-        if (blues.Length == 0 && escenaActual == "Nivel2")
+        if (aliens.Length == 0 && blues.Length == 0 && escenaActual == "Nivel2")
         {
             Debug.Log("Todos los blues han sido destruidos en Nivel2");
             cohete.SetActive(true);
