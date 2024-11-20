@@ -75,7 +75,7 @@ public class AlienController : MonoBehaviour
     {
         Atacado = true;               // Detener el movimiento
         animator.SetBool("Atacado", true);
-        Destroy(gameObject, 1f);        // Destruir el enemigo después de un corto tiempo
+        Destroy(gameObject, 0.7f);        // Destruir el enemigo después de un corto tiempo
     }
 
 }

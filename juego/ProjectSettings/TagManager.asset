@@ -11,6 +11,10 @@ TagManager:
   - taco
   - arma
   - bala
+  - cohete
+  - rey
+  - blue
+  - corona
   layers:
   - Default
   - TransparentFX

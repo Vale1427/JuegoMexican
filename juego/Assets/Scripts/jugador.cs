@@ -26,6 +26,8 @@ public class jugador : MonoBehaviour
     public AudioClip sonidomuerte; // Sonido muerto sin vida
     public AudioClip sonidomuerteAlien; // Sonido cuando muere un alien
     public AudioClip sonidosalto;//sonido para saltal
+    private string currentLevel;
+    
 
     void Start()
     {
@@ -34,6 +36,8 @@ public class jugador : MonoBehaviour
         audioSource = GetComponent<AudioSource>(); // Asigna el componente AudioSource al script
 
         animator.SetBool("estaCorriendo", false);
+        // Obtener el nombre del nivel actual
+        currentLevel = SceneManager.GetActiveScene().name;
 
         // Buscar y asignar la barra de vida
         BarraDeVida = FindObjectOfType<BarraDeVida>();
@@ -169,17 +173,17 @@ public class jugador : MonoBehaviour
 
             animator.SetTrigger("celebrando");
 
+
             Invoke("CargarSiguienteEscena", 3f); // despes de 3 segundos
                                                 // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
         }
 
-        if (other.CompareTag("bala"))
         {
-            animator.SetTrigger("golpe");
-            float dano = 10f;
-            rb2d.velocity = Vector2.zero;
-            vidaActual -= dano;
-            BarraDeVida.CambiarVidaActual(vidaActual);
+
+            // Guarda el nivel completado en el perfil
+            if (ProfileStorage.s_currentProfile != null)
+            {
+                var profile = ProfileStorage.s_currentProfile;
             Destroy(other.gameObject);
 
             if (vidaActual <= 0)
@@ -191,7 +195,13 @@ public class jugador : MonoBehaviour
 
     private void CargarSiguienteEscena()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("Mapa");
+    }
+
+
+    private void CargarFin()
+    {
+        SceneManager.LoadScene("Fin");
     }
 
    private void Muerte()
