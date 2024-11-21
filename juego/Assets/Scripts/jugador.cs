@@ -22,24 +22,21 @@ public class jugador : MonoBehaviour
 
     // Para el sonido
     private AudioSource audioSource;
-    public AudioClip sonidoGolpeAlien; // Sonido que se reproducirá al chocar con el alien
-    public AudioClip sonidomuerte; // Sonido muerto sin vida
-    public AudioClip sonidomuerteAlien; // Sonido cuando muere un alien
-    public AudioClip sonidosalto;//sonido para saltal
+    public AudioClip sonidoGolpeAlien; 
+    public AudioClip sonidomuerte; 
+    public AudioClip sonidomuerteAlien; 
+    public AudioClip sonidosalto;
     private string currentLevel;
-    
 
     void Start()
     {
         animator = GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
-        audioSource = GetComponent<AudioSource>(); // Asigna el componente AudioSource al script
+        audioSource = GetComponent<AudioSource>();
 
         animator.SetBool("estaCorriendo", false);
-        // Obtener el nombre del nivel actual
         currentLevel = SceneManager.GetActiveScene().name;
 
-        // Buscar y asignar la barra de vida
         BarraDeVida = FindObjectOfType<BarraDeVida>();
         if (BarraDeVida == null)
         {
@@ -47,7 +44,6 @@ public class jugador : MonoBehaviour
         }
         else
         {
-            // Inicializar la vida del jugador y la barra de vida
             vidaActual = vidaMaxima;
             BarraDeVida.InicializarBarraDeVida(vidaMaxima);
         }
@@ -62,18 +58,12 @@ public class jugador : MonoBehaviour
             animator.SetBool("estaCorriendo", true);
             estaMoviendo = true;
 
-            // Mover el jugador
             transform.position += new Vector3(movimientoHorizontal, 0, 0) * 3f * Time.deltaTime;
 
-            // Girar el sprite
             if (movimientoHorizontal < 0)
-            {
-                transform.localScale = new Vector3(-1, 1, 1); // izquierda
-            }
+                transform.localScale = new Vector3(-1, 1, 1);
             else if (movimientoHorizontal > 0)
-            {
-                transform.localScale = new Vector3(1, 1, 1); // derecha
-            }
+                transform.localScale = new Vector3(1, 1, 1);
         }
         else
         {
@@ -84,9 +74,8 @@ public class jugador : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && estaEnSuelo)
         {
             if (sonidosalto != null)
-                {
                 audioSource.PlayOneShot(sonidosalto);
-                }
+
             animator.SetBool("estaSaltando", true);
             rb2d.AddForce(new Vector2(0, fuerzaSalto));
             estaEnSuelo = false;
@@ -103,43 +92,26 @@ public class jugador : MonoBehaviour
 
         if (collision.gameObject.tag == "alien")
         {
-            
-
-            // Verificar si el jugador cayó desde arriba del enemigo
             float puntoDeImpacto = collision.contacts[0].point.y;
             float posicionJugador = transform.position.y;
             float posicionEnemigo = collision.transform.position.y;
 
-            // Si la posición del jugador está por encima del enemigo
             if (puntoDeImpacto > posicionEnemigo && posicionJugador > posicionEnemigo + 0.05f)
             {
-                // Ejecutar la animación del enemigo y destruirlo
                 AlienController enemy = collision.gameObject.GetComponent<AlienController>();
-                if (enemy != null)
-                {
-                    enemy.AtacarYDestruir();
-                }
+                if (enemy != null) enemy.AtacarYDestruir();
 
-                // Hacer que el jugador salte después de destruir el enemigo
                 rb2d.AddForce(new Vector2(0, fuerzaSalto * 0.8f));
                 if (sonidoGolpeAlien != null)
-                {
-                audioSource.PlayOneShot(sonidomuerteAlien);
-                }
+                    audioSource.PlayOneShot(sonidomuerteAlien);
             }
             else
             {
-                
-                // Si el jugador choca con el enemigo pero no desde arriba, puede perder vida
                 animator.SetTrigger("golpe");
-                // Reproducir sonido del golpe
                 if (sonidoGolpeAlien != null)
-                {
-                audioSource.PlayOneShot(sonidoGolpeAlien);
-                }
-                float dano = 10f;
+                    audioSource.PlayOneShot(sonidoGolpeAlien);
 
-                // Rebote en dirección contraria al enemigo
+                float dano = 10f;
                 Vector2 direccionRebote = (transform.position.x > collision.transform.position.x) ? Vector2.right : Vector2.left;
                 rb2d.velocity = Vector2.zero;
                 rb2d.AddForce(new Vector2(direccionRebote.x * velocidadRebote.x, velocidadRebote.y), ForceMode2D.Impulse);
@@ -148,9 +120,7 @@ public class jugador : MonoBehaviour
                 BarraDeVida.CambiarVidaActual(vidaActual);
 
                 if (vidaActual <= 0)
-                {
                     Muerte();
-                }
             }
         }
     }
@@ -159,76 +129,50 @@ public class jugador : MonoBehaviour
     {
         if (other.CompareTag("bandera"))
         {
-            
             float vida = 10f;
             vidaActual += vida;
             BarraDeVida.CambiarVidaActual(vidaActual);
             Destroy(other.gameObject);
-
         }
 
         if (other.CompareTag("arma"))
         {
             Destroy(other.gameObject);
-
             animator.SetTrigger("celebrando");
-
-
-            Invoke("CargarSiguienteEscena", 3f); // despes de 3 segundos
-                                                // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+            Invoke("CargarSiguienteEscena", 3f);
         }
 
+        if (ProfileStorage.s_currentProfile != null)
         {
-
-            // Guarda el nivel completado en el perfil
-            if (ProfileStorage.s_currentProfile != null)
-            {
-                var profile = ProfileStorage.s_currentProfile;
+            var profile = ProfileStorage.s_currentProfile;
             Destroy(other.gameObject);
 
             if (vidaActual <= 0)
-            {
                 Muerte();
-            }
         }
     }
 
-    private void CargarSiguienteEscena()
+    private void CargarSiguienteEscena() => SceneManager.LoadScene("Mapa");
+
+    private void CargarFin() => SceneManager.LoadScene("Fin");
+
+    private void Muerte()
     {
-        SceneManager.LoadScene("Mapa");
+        Debug.Log("Muerte() fue llamado");
+        if (sonidomuerte != null)
+        {
+            Debug.Log("Reproduciendo sonido de muerte");
+            audioSource.PlayOneShot(sonidomuerte);
+            Invoke("CargarGameOver", sonidomuerte.length);
+        }
+        else
+        {
+            Debug.LogError("Clip sonidomuerte no asignado");
+            CargarGameOver();
+        }
     }
 
+    private void CargarGameOver() => SceneManager.LoadScene("game-over");
 
-    private void CargarFin()
-    {
-        SceneManager.LoadScene("Fin");
-    }
-
-   private void Muerte()
-{
-    Debug.Log ("Muerte() fue llamado");
-    if (sonidomuerte != null)
-    {
-        Debug.Log("Reproduciendo sonido de muerte");
-        audioSource.PlayOneShot(sonidomuerte);
-        Invoke("CargarGameOver", sonidomuerte.length); // Esperar hasta que termine el sonido
-    }
-    else
-    {
-        Debug.LogError("Clip sonidomuerte no asignado");
-        CargarGameOver();
-    }
-}
-
-private void CargarGameOver()
-{
-    SceneManager.LoadScene("game-over");
-}
-
-
-    // Verificar si el jugador se está moviendo
-    public bool JugadorSeEstaMoviendo()
-    {
-        return estaMoviendo;
-    }
+    public bool JugadorSeEstaMoviendo() => estaMoviendo;
 }
