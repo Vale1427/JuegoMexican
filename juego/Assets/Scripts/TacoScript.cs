@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BanderaScript : MonoBehaviour
+public class TacoScript : MonoBehaviour
 {
 
     [SerializeField] private float cantidadPuntos;
@@ -12,6 +12,7 @@ public class BanderaScript : MonoBehaviour
         if(other.CompareTag("Player")){
             puntaje.SumarPuntos(cantidadPuntos);
             Destroy(gameObject);
+            
         }
     }
 

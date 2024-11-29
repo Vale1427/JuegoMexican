@@ -18,16 +18,22 @@ public class AlienController : MonoBehaviour
     public bool informacionEnfrente;
     public bool mirandoDerecha = true;
 
+    // Referencia al Animator para reproducir la animación "alienAtack"
+    private Animator animator;
+    private bool Atacado = false;
+    
+
     //
     //private Vector3 posicionInicial;
 
-    // void Start()
-    // {
-    //     //rb2D.velocity = new Vector2(velocidadDeMovimiento, rb2D.velocity.y);
-    //     rb2D.velocity = transform.position;  // Guardamos la posición inicial
+    void Start()
+    {
+        //rb2D.velocity = new Vector2(velocidadDeMovimiento, rb2D.velocity.y);
+       // rb2D.velocity = transform.position;  // Guardamos la posición inicial
+       animator = GetComponent<Animator>(); 
 
 
-    // }
+    }
 
     void Update()
     {
@@ -56,14 +62,20 @@ public class AlienController : MonoBehaviour
     }
 
 
-
-
     private void OnDrawGizmos(){
         //dibujar la linea
         Gizmos.color = Color.red;
         Gizmos.DrawLine(controladorAbajo.transform.position, controladorAbajo.transform.position + transform.up * -1 * distanciaAbajo);
         Gizmos.DrawLine(controladorEnfrente.transform.position, controladorEnfrente.transform.position + transform.right * distanciaEnfrente);
 
+    }
+
+    // Método para ejecutar la animación de ataque y destruir el enemigo
+    public void AtacarYDestruir()
+    {
+        Atacado = true;               // Detener el movimiento
+        animator.SetBool("Atacado", true);
+        Destroy(gameObject, 1f);        // Destruir el enemigo después de un corto tiempo
     }
 
 }

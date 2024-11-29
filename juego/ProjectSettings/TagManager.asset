@@ -8,11 +8,13 @@ TagManager:
   - alien
   - plataforma
   - bandera
+  - taco
+  - arma
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Suelo
   - Water
   - UI
   - 
