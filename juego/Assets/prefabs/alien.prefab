@@ -177,7 +177,7 @@ MonoBehaviour:
     m_Bits: 264
   capaEnfrente:
     serializedVersion: 2
-    m_Bits: 448
+    m_Bits: 456
   distanciaAbajo: 3.57
   distanciaEnfrente: 2
   controladorAbajo: {fileID: 8756081526821972733}

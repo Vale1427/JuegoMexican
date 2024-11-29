@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class MenuInicial : MonoBehaviour
 {
     public void Jugar(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        SceneManager.LoadScene("Nivel");
     }
 
     public void Salir(){
@@ -14,15 +14,41 @@ public class MenuInicial : MonoBehaviour
       Application.Quit();
     }
 
+    public void NivelDos(){
+        SceneManager.LoadScene("Nivel2");
+    }
+
+    public void NivelTres(){
+        SceneManager.LoadScene("Nivel3");
+    }
+
     public void Controles(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        SceneManager.LoadScene("controles");
     }
 
     public void VolverInicio(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex -3);
+        SceneManager.LoadScene("menu-inicial");
     }
 
     public void VolverJugar(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
+        SceneManager.LoadScene("Nivel");
+    }
+
+    public void SeleccionPersonaje(){
+        SceneManager.LoadScene("jugador");
+    }
+
+    public void Mapa(){
+        SceneManager.LoadScene("Mapa");
+    }
+
+    
+    public void VerPartidas(){
+        SceneManager.LoadScene("P_Game");
+    }
+
+    
+    public void NuevaPartida(){
+        SceneManager.LoadScene("NewGame");
     }
 }

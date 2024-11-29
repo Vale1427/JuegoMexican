@@ -5,9 +5,6 @@ using TMPro;
 
 public class Puntaje : MonoBehaviour
 {
-
-    private float puntos;
-
     private TextMeshProUGUI textMesh;
 
     void Start()
@@ -15,14 +12,12 @@ public class Puntaje : MonoBehaviour
         textMesh = GetComponent<TextMeshProUGUI>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-     textMesh.text = puntos.ToString("0");   
-    }
-
-    public void SumarPuntos(float puntosEntrada){
-
-        puntos += puntosEntrada;
+        // Obtiene la cantidad de puntos desde el ControladorPuntos y los muestra
+        if (ControladorPuntos.Instance != null)
+        {
+            textMesh.text = ControladorPuntos.Instance.cantidadPuntos.ToString("0");
+        }
     }
 }

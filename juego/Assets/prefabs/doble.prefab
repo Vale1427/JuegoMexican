@@ -88,7 +88,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3899707795369588419, guid: 3fef8b9c246e3c3478e8231be1caa0e8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3fef8b9c246e3c3478e8231be1caa0e8, type: 3}
 --- !u!4 &7737702041413883757 stripped
 Transform:
@@ -102,6 +103,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5647406062349641080}
     m_Modifications:
+    - target: {fileID: 3899707795369588419, guid: 3fef8b9c246e3c3478e8231be1caa0e8, type: 3}
+      propertyPath: m_Size.x
+      value: 3.158374
+      objectReference: {fileID: 0}
+    - target: {fileID: 3899707795369588419, guid: 3fef8b9c246e3c3478e8231be1caa0e8, type: 3}
+      propertyPath: m_Center.x
+      value: 0.7055802
+      objectReference: {fileID: 0}
+    - target: {fileID: 3899707795369588419, guid: 3fef8b9c246e3c3478e8231be1caa0e8, type: 3}
+      propertyPath: m_Center.y
+      value: -0.0027932266
+      objectReference: {fileID: 0}
     - target: {fileID: 6533750157113746532, guid: 3fef8b9c246e3c3478e8231be1caa0e8, type: 3}
       propertyPath: m_Name
       value: plataforma

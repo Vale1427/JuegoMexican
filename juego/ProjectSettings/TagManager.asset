@@ -8,15 +8,22 @@ TagManager:
   - alien
   - plataforma
   - bandera
+  - taco
+  - arma
+  - bala
+  - cohete
+  - rey
+  - blue
+  - corona
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Suelo
   - Water
   - UI
-  - 
-  - 
+  - Enemigos
+  - Jugador
   - 
   - 
   - 
